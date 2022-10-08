@@ -31,18 +31,6 @@ import configuration from "./config";
       }),
       inject: [ConfigService],
     }),
-
-    // TypeOrmModule.forRoot({
-    //   keepConnectionAlive: true,
-    //   type: "postgres",
-    //   host: process.env.POSTGRES_URI,
-    //   port: Number(process.env.POSTGRES_PORT),
-    //   username: process.env.POSTGRES_USER,
-    //   password: process.env.POSTGRES_PASSWORD,
-    //   database: process.env.POSTGRES_DB,
-    //   autoLoadEntities: true,
-    //   synchronize: true,
-    // }),
   ],
 })
 export class AppModule {}
