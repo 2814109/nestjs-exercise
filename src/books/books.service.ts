@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Book } from "../entity/book";
+import { Book } from "../entity/book.entity";
 import { NewBookInput } from "./dto/newBook.input";
 
 @Injectable()
@@ -19,7 +19,10 @@ export class BooksService {
 
   findOneById(id: number): Promise<Book> {
     // fix : if use argument as id, then error that is not exist roperty, so def argument as wehre object
-    return this.booksRepositoty.findOne({ where: { id } });
+    // return this.booksRepositoty.findOne({ where: { id } });
+
+    // other method
+    return this.booksRepositoty.findOneBy({ id });
   }
 
   async create(data: NewBookInput): Promise<Book> {

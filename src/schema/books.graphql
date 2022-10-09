@@ -1,12 +1,25 @@
 type Book {
-  id: Int
-  title: String
-  author: String
-  price: Int
-  createdAt: String
+  id: ID!
+  title: String!
+  author: [String!]!
+  price: Int!
+  createdAt: DateTime!
 }
+
+scalar DateTime
 
 type Query {
   books: [Book]
-  getBook: [Book]
+  getBook(id: Int!): Book!
+}
+
+type Mutation {
+  addBook(newBook: newBookInput!): Book
+  removeBook(id: Int!): Boolean!
+}
+
+input newBookInput {
+  title: String!
+  price: Int!
+  author: String!
 }

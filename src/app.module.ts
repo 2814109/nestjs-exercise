@@ -5,7 +5,8 @@ import { BooksModule } from "./books/books.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import configuration from "./config";
-import { Book } from "./entity/book";
+import { join } from "path";
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -13,7 +14,6 @@ import { Book } from "./entity/book";
       load: [configuration],
     }),
 
-    BooksModule,
     // setting for graphql
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -30,12 +30,13 @@ import { Book } from "./entity/book";
         password: configService.get("database.pass"),
         database: configService.get("database.name"),
         synchronize: true,
-        // def entitys
-        entities: [Book],
+        // def entities
+        entities: [join(__dirname + "/**/*.entity{.ts,.js}")],
         extra: {},
       }),
       inject: [ConfigService],
     }),
+    BooksModule,
   ],
 })
 export class AppModule {}

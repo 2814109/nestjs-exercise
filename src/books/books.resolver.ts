@@ -1,6 +1,6 @@
 import { NotFoundException } from "@nestjs/common";
 import { Args, Int, Mutation, Query, Resolver } from "@nestjs/graphql";
-import { Book } from "../entity/book";
+import { Book } from "../entity/book.entity";
 import { BooksService } from "./books.service";
 import { NewBookInput } from "./dto/newBook.input";
 
@@ -10,6 +10,7 @@ export class BooksResolver {
 
   @Query((returns) => [Book])
   books(): Promise<Book[]> {
+    console.log("test");
     return this.booksService.findAll();
   }
 
@@ -22,13 +23,13 @@ export class BooksResolver {
     return book;
   }
 
-  //   @Mutation((returns) => Book)
-  //   addBook(@Args('newBook') newBook: NewBookInput): Promise<Book> {
-  //     return this.booksService.create(newBook);
-  //   }
+  @Mutation((returns) => Book)
+  addBook(@Args("newBook") newBook: NewBookInput): Promise<Book> {
+    return this.booksService.create(newBook);
+  }
 
-  //   @Mutation((returns) => Boolean)
-  //   async removeBook(@Args({ name: 'id', type: () => Int }) id: number) {
-  //     return this.booksService.remove(id);
-  //   }
+  @Mutation((returns) => Boolean)
+  async removeBook(@Args({ name: "id", type: () => Int }) id: number) {
+    return this.booksService.remove(id);
+  }
 }
