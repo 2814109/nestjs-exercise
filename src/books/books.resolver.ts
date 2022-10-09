@@ -10,7 +10,6 @@ export class BooksResolver {
 
   @Query((returns) => [Book])
   books(): Promise<Book[]> {
-    console.log("test");
     return this.booksService.findAll();
   }
 
