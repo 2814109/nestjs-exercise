@@ -6,6 +6,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import configuration from "./config";
 import { join } from "path";
+import { Book } from "./entity/book.entity";
 
 @Module({
   imports: [
@@ -31,8 +32,10 @@ import { join } from "path";
         database: configService.get("database.name"),
         synchronize: true,
         // def entities
-        entities: [join(__dirname + "/**/*.entity{.ts,.js}")],
+        entities: [Book],
         extra: {},
+        logging: true,
+        logger: "file",
       }),
       inject: [ConfigService],
     }),
