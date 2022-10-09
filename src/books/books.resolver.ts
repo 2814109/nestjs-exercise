@@ -1,8 +1,8 @@
-import { NotFoundException } from '@nestjs/common';
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Book } from './book';
-import { BooksService } from './books.service';
-import { NewBookInput } from './dto/newBook.input';
+import { NotFoundException } from "@nestjs/common";
+import { Args, Int, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Book } from "../entity/book";
+import { BooksService } from "./books.service";
+import { NewBookInput } from "./dto/newBook.input";
 
 @Resolver((of) => Book)
 export class BooksResolver {
@@ -14,7 +14,7 @@ export class BooksResolver {
   }
 
   @Query((returns) => Book)
-  async getBook(@Args({ name: 'id', type: () => Int }) id: number) {
+  async getBook(@Args({ name: "id", type: () => Int }) id: number) {
     const book = await this.booksService.findOneById(id);
     if (!book) {
       throw new NotFoundException(id);
