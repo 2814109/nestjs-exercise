@@ -14,10 +14,12 @@ import configuration from "./config";
     }),
 
     BooksModule,
+    // setting for graphql
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ["./**/*.graphql"],
     }),
+    // setting for typeORM
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
