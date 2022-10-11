@@ -18,7 +18,7 @@ import { Book } from "./entity/book.entity";
     // setting for graphql
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      typePaths: ["./**/*.graphql"],
+      autoSchemaFile: "src/schema.gql",
     }),
     // setting for typeORM
     TypeOrmModule.forRootAsync({
