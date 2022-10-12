@@ -26,6 +26,7 @@ export class NewBookInput {
   @Field((type) => String)
   author: string;
 }
+
 @Resolver(Book)
 export class BooksResolver {
   constructor(private booksService: BooksService) {}

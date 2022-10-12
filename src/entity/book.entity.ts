@@ -25,6 +25,10 @@ export class Book {
   @Field((type) => Int)
   price: number;
 
+  @Column({ default: false })
+  @Field((type) => Boolean)
+  isArchive: boolean;
+
   @CreateDateColumn()
   @Field()
   createdAt: Date;

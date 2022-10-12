@@ -8,6 +8,7 @@ type Book {
   title: String!
   author: String!
   price: Int!
+  isArchive: Boolean!
   createdAt: DateTime!
 }
 

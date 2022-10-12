@@ -29,7 +29,7 @@ import { Book } from "./entity/book.entity";
         username: configService.get("database.user"),
         password: configService.get("database.pass"),
         database: configService.get("database.name"),
-        synchronize: false,
+        synchronize: true,
         migrations: ["src/migration/**/*.ts"],
         // def entities
         entities: [Book],
