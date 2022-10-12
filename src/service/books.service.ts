@@ -1,15 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
 import { Book } from "../entity/book.entity";
-import { NewBookInput } from "./dto/newBook.input";
-
+import { NewBookInput } from "../resolver/books.resolver";
+import { BooksRepository } from "src/infra/books.repository";
 @Injectable()
 export class BooksService {
   // def entity at constructor
   constructor(
     @InjectRepository(Book)
-    private booksRepositoty: Repository<Book>,
+    private booksRepositoty: BooksRepository,
   ) {}
 
   findAll(): Promise<Book[]> {

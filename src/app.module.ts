@@ -1,11 +1,10 @@
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { Module } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
-import { BooksModule } from "./books/books.module";
+import { BooksModule } from "./module/books.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import configuration from "./config";
-import { join } from "path";
 import { Book } from "./entity/book.entity";
 
 @Module({
@@ -31,6 +30,7 @@ import { Book } from "./entity/book.entity";
         password: configService.get("database.pass"),
         database: configService.get("database.name"),
         synchronize: false,
+        migrations: ["src/migration/**/*.ts"],
         // def entities
         entities: [Book],
         extra: {},

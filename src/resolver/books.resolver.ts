@@ -1,19 +1,41 @@
 import { NotFoundException } from "@nestjs/common";
-import { Args, Int, Mutation, Query, Resolver } from "@nestjs/graphql";
+import {
+  Field,
+  InputType,
+  Args,
+  Int,
+  Mutation,
+  Query,
+  Resolver,
+} from "@nestjs/graphql";
 import { Book } from "../entity/book.entity";
-import { BooksService } from "../books/books.service";
-import { NewBookInput } from "../books/dto/newBook.input";
+import { BooksService } from "../service/books.service";
+import { Max, MaxLength, Min } from "class-validator";
 
-@Resolver((of) => Book)
+@InputType()
+export class NewBookInput {
+  @Field()
+  @MaxLength(30)
+  title: string;
+
+  @Field((type) => Int)
+  @Min(0)
+  @Max(9999)
+  price: number;
+
+  @Field((type) => String)
+  author: string;
+}
+@Resolver(Book)
 export class BooksResolver {
   constructor(private booksService: BooksService) {}
 
-  @Query((returns) => [Book])
+  @Query(() => [Book])
   books(): Promise<Book[]> {
     return this.booksService.findAll();
   }
 
-  @Query((returns) => Book)
+  @Query(() => Book)
   async getBook(@Args({ name: "id", type: () => Int }) id: number) {
     const book = await this.booksService.findOneById(id);
     if (!book) {
@@ -22,12 +44,12 @@ export class BooksResolver {
     return book;
   }
 
-  @Mutation((returns) => Book)
+  @Mutation(() => Book)
   addBook(@Args("newBook") newBook: NewBookInput): Promise<Book> {
     return this.booksService.create(newBook);
   }
 
-  @Mutation((returns) => Boolean)
+  @Mutation(() => Boolean)
   async removeBook(@Args({ name: "id", type: () => Int }) id: number) {
     return this.booksService.remove(id);
   }
