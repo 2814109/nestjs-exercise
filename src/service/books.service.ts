@@ -8,12 +8,12 @@ export class BooksService {
   // def entity at constructor
   constructor(
     @InjectRepository(Book)
-    private booksRepositoty: BooksRepository,
+    private readonly booksRepositoty: BooksRepository,
   ) {}
 
   findAll(): Promise<Book[]> {
     // ref to member variable of repository
-    return this.booksRepositoty.find();
+    return this.booksRepositoty.getAllBook();
   }
 
   findOneById(id: number): Promise<Book> {
