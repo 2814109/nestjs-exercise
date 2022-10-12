@@ -17,6 +17,7 @@ export class Book {
   @Field()
   title: string;
 
+  // related author as array
   @Column()
   @Field((type) => String)
   author: string;
@@ -28,6 +29,10 @@ export class Book {
   @Column({ default: false })
   @Field((type) => Boolean)
   isArchive: boolean;
+
+  @Column()
+  @Field()
+  isbn: number;
 
   @CreateDateColumn()
   @Field()
