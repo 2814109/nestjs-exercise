@@ -8,7 +8,7 @@ import {
   Query,
   Resolver,
 } from "@nestjs/graphql";
-import { Book } from "../entity/book.entity";
+import { Book } from "../entity/Book.entity";
 import { BooksService } from "../service/books.service";
 import { Max, MaxLength, Min } from "class-validator";
 

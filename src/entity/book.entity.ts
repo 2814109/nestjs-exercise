@@ -30,10 +30,6 @@ export class Book {
   @Field((type) => Boolean)
   isArchive: boolean;
 
-  @Column()
-  @Field()
-  isbn: number;
-
   @CreateDateColumn()
   @Field()
   createdAt: Date;

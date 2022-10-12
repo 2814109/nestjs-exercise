@@ -5,7 +5,7 @@ import { BooksModule } from "./module/books.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import configuration from "./config";
-import { Book } from "./entity/book.entity";
+import { Book } from "./entity/Book.entity";
 
 @Module({
   imports: [

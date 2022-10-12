@@ -22,7 +22,6 @@ export class Review {
   @Field(() => String)
   comment: string;
 
-  // related user
   @Column()
   @Field(() => Int)
   userId: number;
