@@ -6,10 +6,7 @@ import { BooksRepository } from "src/infra/books.repository";
 @Injectable()
 export class BooksService {
   // def entity at constructor
-  constructor(
-    @InjectRepository(Book)
-    private readonly booksRepositoty: BooksRepository,
-  ) {}
+  constructor(private booksRepositoty: BooksRepository) {}
 
   findAll(): Promise<Book[]> {
     // ref to member variable of repository
