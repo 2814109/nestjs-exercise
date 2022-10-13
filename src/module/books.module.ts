@@ -6,7 +6,7 @@ import { BooksResolver } from "../resolver/books.resolver";
 import { BooksRepository } from "src/infra/books.repository";
 @Module({
   // def Entity as TypeORM Module
-  imports: [TypeOrmModule.forFeature([Book]), BooksRepository],
+  imports: [TypeOrmModule.forFeature([Book])],
   providers: [BooksService, BooksResolver, BooksRepository],
   exports: [BooksService, TypeOrmModule],
 })

@@ -3,42 +3,21 @@ import { Module } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
 import { BooksModule } from "./module/books.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import configuration from "./config";
-import { Book } from "./entity/Book.entity";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration],
+      envFilePath: [".env"],
     }),
-
     // setting for graphql
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: "src/schema.gql",
     }),
     // setting for typeORM
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: "postgres",
-        host: configService.get("database.host"),
-        port: Number(configService.get("database.port")),
-        username: configService.get("database.user"),
-        password: configService.get("database.pass"),
-        database: configService.get("database.name"),
-        synchronize: true,
-        migrations: ["src/migration/**/*.ts"],
-        // def entities
-        entities: [Book],
-        extra: {},
-        logging: true,
-        logger: "file",
-      }),
-      inject: [ConfigService],
-    }),
+    TypeOrmModule.forRoot(),
     BooksModule,
   ],
 })

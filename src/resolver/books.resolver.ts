@@ -29,7 +29,7 @@ export class NewBookInput {
 
 @Resolver(Book)
 export class BooksResolver {
-  constructor(private readonly booksService: BooksService) {}
+  constructor(private booksService: BooksService) {}
 
   @Query(() => [Book])
   books(): Promise<Book[]> {
